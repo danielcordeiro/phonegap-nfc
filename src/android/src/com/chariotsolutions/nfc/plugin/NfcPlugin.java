@@ -485,13 +485,13 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
             Activity activity = getActivity();
             Intent intent = new Intent(activity, activity.getClass());
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            //pendingIntent = PendingIntent.getActivity(activity, 0, intent, 0);
 
             int flags = 0;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            // API 31 = Android 12
+            if (android.os.Build.VERSION.SDK_INT >= 31) {
                 flags |= PendingIntent.FLAG_IMMUTABLE;
             }
-            pendingIntent = PendingIntent.getActivity(context, 0, intent, flags);
+            pendingIntent = PendingIntent.getActivity(activity, 0, intent, flags);
         }
     }
 
